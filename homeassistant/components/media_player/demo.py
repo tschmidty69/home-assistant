@@ -85,7 +85,7 @@ class AbstractDemoPlayer(MediaPlayerDevice):
 
     @property
     def repeat(self):
-        """Boolean if repeat is enabled."""
+        """repeat is enabled."""
         return self._repeat
 
     @property

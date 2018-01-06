@@ -300,8 +300,8 @@ class MpdDevice(MediaPlayerDevice):
 
     @property
     def repeat(self):
-        """Boolean if repeat is enabled."""
-        return bool(self._status['repeat'])
+        """repeat is enabled."""
+        return self._status['repeat']
 
     def set_repeat(self, repeat):
         """Enable/disable repeat mode."""
