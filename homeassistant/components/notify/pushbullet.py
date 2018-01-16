@@ -152,9 +152,9 @@ class PushBulletNotificationService(BaseNotificationService):
                     if filedata.get('file_type') == 'application/x-empty':
                         _LOGGER.error("Can not send an empty file")
                         return
-
+                    filedata.update(email_kwargs)
                     pusher.push_file(title=title, body=message,
-                                     **email_kwargs, **filedata)
+                                     **filedata)
             elif file_url:
                 if not file_url.startswith('http'):
                     _LOGGER.error("URL should start with http or https")
@@ -164,7 +164,7 @@ class PushBulletNotificationService(BaseNotificationService):
                                  file_type=(mimetypes
                                             .guess_type(file_url)[0]))
             elif data_list:
-                pusher.push_note(title, data_list, **email_kwargs)
+                pusher.push_list(title, data_list, **email_kwargs)
             else:
                 pusher.push_note(title, message, **email_kwargs)
         except PushError as err:
