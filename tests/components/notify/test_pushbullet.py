@@ -128,8 +128,7 @@ class TestPushBullet(unittest.TestCase):
         )
         data = {'title': 'Test Title',
                 'message': 'Test Message',
-                'target': ['device/DESKTOP', 'device/My iPhone']
-               }
+                'target': ['device/DESKTOP', 'device/My iPhone']}
         self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
         self.assertTrue(mock.called)
@@ -181,7 +180,6 @@ class TestPushBullet(unittest.TestCase):
                          'type': 'note'}
         self.assertEqual(mock.request_history[0].json(), expected_body)
 
-
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
                   return_value=json.loads(load_fixture(
@@ -220,7 +218,6 @@ class TestPushBullet(unittest.TestCase):
                          'title': 'Test Title',
                          'type': 'note'}
         self.assertEqual(mock.request_history[1].json(), expected_body)
-
 
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
