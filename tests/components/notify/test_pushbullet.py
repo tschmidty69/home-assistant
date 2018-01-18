@@ -65,8 +65,7 @@ class TestPushBullet(unittest.TestCase):
             json={'mock_response': 'Ok'}
         )
         data = {'title': 'Test Title',
-                'message': 'Test Message'
-               }
+                'message': 'Test Message'}
         self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
         self.assertTrue(mock.called)
@@ -74,8 +73,7 @@ class TestPushBullet(unittest.TestCase):
 
         expected_body = {'body': 'Test Message',
                          'title': 'Test Title',
-                         'type': 'note'
-                        }
+                         'type': 'note'}
         self.assertEqual(mock.last_request.json(), expected_body)
 
     @requests_mock.Mocker()
@@ -98,8 +96,7 @@ class TestPushBullet(unittest.TestCase):
         )
         data = {'title': 'Test Title',
                 'message': 'Test Message',
-                'target': ['device/DESKTOP']
-               }
+                'target': ['device/DESKTOP']}
         self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
         self.assertTrue(mock.called)
@@ -108,8 +105,7 @@ class TestPushBullet(unittest.TestCase):
         expected_body = {'body': 'Test Message',
                          'device_iden': 'identity1',
                          'title': 'Test Title',
-                         'type': 'note'
-                        }
+                         'type': 'note'}
         self.assertEqual(mock.last_request.json(), expected_body)
 
     @requests_mock.Mocker()
@@ -143,14 +139,12 @@ class TestPushBullet(unittest.TestCase):
         expected_body = {'body': 'Test Message',
                          'device_iden': 'identity1',
                          'title': 'Test Title',
-                         'type': 'note'
-                        }
+                         'type': 'note'}
         self.assertEqual(mock.request_history[0].json(), expected_body)
         expected_body = {'body': 'Test Message',
                          'device_iden': 'identity2',
                          'title': 'Test Title',
-                         'type': 'note'
-                        }
+                         'type': 'note'}
         self.assertEqual(mock.request_history[1].json(), expected_body)
 
 
@@ -174,8 +168,7 @@ class TestPushBullet(unittest.TestCase):
         )
         data = {'title': 'Test Title',
                 'message': 'Test Message',
-                'target': ['email/user@host.net']
-               }
+                'target': ['email/user@host.net']}
         self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
         self.assertTrue(mock.called)
@@ -185,8 +178,7 @@ class TestPushBullet(unittest.TestCase):
         expected_body = {'body': 'Test Message',
                          'email': 'user@host.net',
                          'title': 'Test Title',
-                         'type': 'note'
-                        }
+                         'type': 'note'}
         self.assertEqual(mock.request_history[0].json(), expected_body)
 
 
@@ -210,8 +202,7 @@ class TestPushBullet(unittest.TestCase):
         )
         data = {'title': 'Test Title',
                 'message': 'Test Message',
-                'target': ['device/DESKTOP', 'email/user@host.net']
-               }
+                'target': ['device/DESKTOP', 'email/user@host.net']}
         self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
         self.assertTrue(mock.called)
@@ -227,8 +218,7 @@ class TestPushBullet(unittest.TestCase):
         expected_body = {'body': 'Test Message',
                          'email': 'user@host.net',
                          'title': 'Test Title',
-                         'type': 'note'
-                        }
+                         'type': 'note'}
         self.assertEqual(mock.request_history[1].json(), expected_body)
 
 
@@ -253,7 +243,6 @@ class TestPushBullet(unittest.TestCase):
         data = {'title': 'Test Title',
                 'message': 'Test Message',
                 'target': ['device/DESKTOP', 'device/My iPhone'],
-                'data': {'file': 'not_a_file'}
-               }
+                'data': {'file': 'not_a_file'}}
         assert not self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
