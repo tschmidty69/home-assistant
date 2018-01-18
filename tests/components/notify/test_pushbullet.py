@@ -51,7 +51,7 @@ class TestPushBullet(unittest.TestCase):
                   return_value=json.loads(load_fixture(
                       'pushbullet_devices.json')))
     def test_pushbullet_push_default(self, mock, mock__get_data):
-        """ Test pushbullet push to default target. """
+        """Test pushbullet push to default target."""
         config = {notify.DOMAIN: {'name': 'test',
                                   'platform': 'pushbullet',
                                   'api_key': 'MYFAKEKEY'}}
@@ -66,7 +66,7 @@ class TestPushBullet(unittest.TestCase):
         )
         data = {'title': 'Test Title',
                 'message': 'Test Message'
-        }
+               }
         self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
         self.assertTrue(mock.called)
@@ -75,15 +75,15 @@ class TestPushBullet(unittest.TestCase):
         expected_body = {'body': 'Test Message',
                          'title': 'Test Title',
                          'type': 'note'
-                         }
+                        }
         self.assertEqual(mock.last_request.json(), expected_body)
 
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
-               return_value=json.loads(
-               load_fixture('pushbullet_devices.json')))
+                  return_value=json.loads(load_fixture(
+                      'pushbullet_devices.json')))
     def test_pushbullet_push_device(self, mock, mock__get_data):
-        """ Test pushbullet push to default target. """
+        """Test pushbullet push to default target."""
         config = {notify.DOMAIN: {'name': 'test',
                                   'platform': 'pushbullet',
                                   'api_key': 'MYFAKEKEY'}}
@@ -99,7 +99,7 @@ class TestPushBullet(unittest.TestCase):
         data = {'title': 'Test Title',
                 'message': 'Test Message',
                 'target': ['device/DESKTOP']
-        }
+               }
         self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
         self.assertTrue(mock.called)
@@ -109,15 +109,15 @@ class TestPushBullet(unittest.TestCase):
                          'device_iden': 'identity1',
                          'title': 'Test Title',
                          'type': 'note'
-                         }
+                        }
         self.assertEqual(mock.last_request.json(), expected_body)
 
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
-        return_value=json.loads(
-        load_fixture('pushbullet_devices.json')))
+                  return_value=json.loads(load_fixture(
+                      'pushbullet_devices.json')))
     def test_pushbullet_push_devices(self, mock, mock__get_data):
-        """ Test pushbullet push to default target. """
+        """Test pushbullet push to default target."""
         config = {notify.DOMAIN: {'name': 'test',
                                   'platform': 'pushbullet',
                                   'api_key': 'MYFAKEKEY'}}
@@ -133,7 +133,7 @@ class TestPushBullet(unittest.TestCase):
         data = {'title': 'Test Title',
                 'message': 'Test Message',
                 'target': ['device/DESKTOP', 'device/My iPhone']
-        }
+               }
         self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
         self.assertTrue(mock.called)
@@ -144,22 +144,22 @@ class TestPushBullet(unittest.TestCase):
                          'device_iden': 'identity1',
                          'title': 'Test Title',
                          'type': 'note'
-                         }
+                        }
         self.assertEqual(mock.request_history[0].json(), expected_body)
         expected_body = {'body': 'Test Message',
                          'device_iden': 'identity2',
                          'title': 'Test Title',
                          'type': 'note'
-                         }
+                        }
         self.assertEqual(mock.request_history[1].json(), expected_body)
 
 
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
-        return_value=json.loads(
-        load_fixture('pushbullet_devices.json')))
+                  return_value=json.loads(load_fixture(
+                      'pushbullet_devices.json')))
     def test_pushbullet_push_email(self, mock, mock__get_data):
-        """ Test pushbullet push to default target. """
+        """Test pushbullet push to default target."""
         config = {notify.DOMAIN: {'name': 'test',
                                   'platform': 'pushbullet',
                                   'api_key': 'MYFAKEKEY'}}
@@ -175,7 +175,7 @@ class TestPushBullet(unittest.TestCase):
         data = {'title': 'Test Title',
                 'message': 'Test Message',
                 'target': ['email/user@host.net']
-        }
+               }
         self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
         self.assertTrue(mock.called)
@@ -186,16 +186,16 @@ class TestPushBullet(unittest.TestCase):
                          'email': 'user@host.net',
                          'title': 'Test Title',
                          'type': 'note'
-                         }
+                        }
         self.assertEqual(mock.request_history[0].json(), expected_body)
 
 
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
-               return_value=json.loads(
-               load_fixture('pushbullet_devices.json')))
-    def test_pushbullet_push_email_and_device(self, mock, mock__get_data):
-        """ Test pushbullet push to default target. """
+                  return_value=json.loads(load_fixture(
+                      'pushbullet_devices.json')))
+    def test_pushbullet_push_mixed(self, mock, mock__get_data):
+        """Test pushbullet push to default target."""
         config = {notify.DOMAIN: {'name': 'test',
                                   'platform': 'pushbullet',
                                   'api_key': 'MYFAKEKEY'}}
@@ -211,7 +211,7 @@ class TestPushBullet(unittest.TestCase):
         data = {'title': 'Test Title',
                 'message': 'Test Message',
                 'target': ['device/DESKTOP', 'email/user@host.net']
-        }
+               }
         self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
         self.assertTrue(mock.called)
@@ -222,22 +222,22 @@ class TestPushBullet(unittest.TestCase):
                          'device_iden': 'identity1',
                          'title': 'Test Title',
                          'type': 'note'
-                         }
+                        }
         self.assertEqual(mock.request_history[0].json(), expected_body)
         expected_body = {'body': 'Test Message',
                          'email': 'user@host.net',
                          'title': 'Test Title',
                          'type': 'note'
-                         }
+                        }
         self.assertEqual(mock.request_history[1].json(), expected_body)
 
 
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
-               return_value=json.loads(
-               load_fixture('pushbullet_devices.json')))
-    def test_pushbullet_push_nonexistent_file(self, mock, mock__get_data):
-        """ Test pushbullet push to default target. """
+                  return_value=json.loads(load_fixture(
+                      'pushbullet_devices.json')))
+    def test_pushbullet_push_no_file(self, mock, mock__get_data):
+        """Test pushbullet push to default target."""
         config = {notify.DOMAIN: {'name': 'test',
                                   'platform': 'pushbullet',
                                   'api_key': 'MYFAKEKEY'}}
@@ -253,9 +253,7 @@ class TestPushBullet(unittest.TestCase):
         data = {'title': 'Test Title',
                 'message': 'Test Message',
                 'target': ['device/DESKTOP', 'device/My iPhone'],
-                'data': {
-                    'file': 'not_a_file'
-                }
-        }
+                'data': {'file': 'not_a_file'}
+               }
         assert not self.hass.services.call(notify.DOMAIN, 'test', data)
         self.hass.block_till_done()
