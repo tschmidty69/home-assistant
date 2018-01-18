@@ -23,10 +23,9 @@ class TestPushBullet(unittest.TestCase):
         """Stop everything that we started."""
         self.hass.stop()
 
-
     @patch.object(PushBullet, '_get_data',
-               return_value=json.loads(
-               load_fixture('pushbullet_devices.json')))
+        return_value=json.loads(
+        load_fixture('pushbullet_devices.json')))
     def test_pushbullet_config(self, mock__get_data):
         """Test setup."""
         config = {notify.DOMAIN: {'name': 'test',
@@ -46,7 +45,6 @@ class TestPushBullet(unittest.TestCase):
         with assert_setup_component(0) as handle_config:
             assert setup_component(self.hass, notify.DOMAIN, config)
         assert not handle_config[notify.DOMAIN]
-
 
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
@@ -79,7 +77,6 @@ class TestPushBullet(unittest.TestCase):
                          'type': 'note'
                          }
         self.assertEqual(mock.last_request.json(), expected_body)
-
 
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
@@ -115,11 +112,10 @@ class TestPushBullet(unittest.TestCase):
                          }
         self.assertEqual(mock.last_request.json(), expected_body)
 
-
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
-               return_value=json.loads(
-               load_fixture('pushbullet_devices.json')))
+        return_value=json.loads(
+        load_fixture('pushbullet_devices.json')))
     def test_pushbullet_push_devices(self, mock, mock__get_data):
         """ Test pushbullet push to default target. """
         config = {notify.DOMAIN: {'name': 'test',
@@ -160,8 +156,8 @@ class TestPushBullet(unittest.TestCase):
 
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
-               return_value=json.loads(
-               load_fixture('pushbullet_devices.json')))
+        return_value=json.loads(
+        load_fixture('pushbullet_devices.json')))
     def test_pushbullet_push_email(self, mock, mock__get_data):
         """ Test pushbullet push to default target. """
         config = {notify.DOMAIN: {'name': 'test',
