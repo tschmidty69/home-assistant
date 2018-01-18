@@ -25,7 +25,7 @@ class TestPushBullet(unittest.TestCase):
 
     @patch.object(PushBullet, '_get_data',
                   return_value=json.loads(load_fixture(
-                    'pushbullet_devices.json')))
+                      'pushbullet_devices.json')))
     def test_pushbullet_config(self, mock__get_data):
         """Test setup."""
         config = {notify.DOMAIN: {'name': 'test',
@@ -48,8 +48,8 @@ class TestPushBullet(unittest.TestCase):
 
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
-               return_value=json.loads(
-               load_fixture('pushbullet_devices.json')))
+                  return_value=json.loads(load_fixture(
+                      'pushbullet_devices.json')))
     def test_pushbullet_push_default(self, mock, mock__get_data):
         """ Test pushbullet push to default target. """
         config = {notify.DOMAIN: {'name': 'test',
