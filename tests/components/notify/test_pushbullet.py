@@ -24,8 +24,8 @@ class TestPushBullet(unittest.TestCase):
         self.hass.stop()
 
     @patch.object(PushBullet, '_get_data',
-        return_value=json.loads(
-        load_fixture('pushbullet_devices.json')))
+                  return_value=json.loads(
+                  load_fixture('pushbullet_devices.json')))
     def test_pushbullet_config(self, mock__get_data):
         """Test setup."""
         config = {notify.DOMAIN: {'name': 'test',
