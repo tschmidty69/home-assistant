@@ -1,25 +1,19 @@
 """The tests for the pushbullet notification platform."""
-import asyncio
 import json
 import unittest
-from unittest import mock
 from unittest.mock import patch
 
 from pushbullet import PushBullet
-from pushbullet import Device
-from pushbullet import InvalidKeyError
 import requests_mock
 
 from homeassistant.setup import setup_component
-from homeassistant.const import CONF_API_KEY
 import homeassistant.components.notify as notify
-import homeassistant.components.notify.pushbullet as pushbullet
 from tests.common import (
     assert_setup_component, get_test_home_assistant, load_fixture)
 
 
 class TestPushBullet(unittest.TestCase):
-    """ Tests the Pushbullet Component. """
+    """Tests the Pushbullet Component."""
 
     def setUp(self):
         """Initialize values for this test case class."""
