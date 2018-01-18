@@ -146,7 +146,6 @@ class TestPushBullet(unittest.TestCase):
                          'type': 'note'}
         self.assertEqual(mock.request_history[1].json(), expected_body)
 
-
     @requests_mock.Mocker()
     @patch.object(PushBullet, '_get_data',
                   return_value=json.loads(load_fixture(
@@ -210,8 +209,7 @@ class TestPushBullet(unittest.TestCase):
         expected_body = {'body': 'Test Message',
                          'device_iden': 'identity1',
                          'title': 'Test Title',
-                         'type': 'note'
-                        }
+                         'type': 'note'}
         self.assertEqual(mock.request_history[0].json(), expected_body)
         expected_body = {'body': 'Test Message',
                          'email': 'user@host.net',
