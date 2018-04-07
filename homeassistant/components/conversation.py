@@ -125,7 +125,7 @@ async def async_setup(hass, config):
 
     @callback
     def register_utterances(component):
-        """Register Utterances."""
+        """Register utterances for a component."""
         if component not in UTTERANCES:
             return
         for intent_type, sentences in UTTERANCES[component].items():
@@ -133,7 +133,7 @@ async def async_setup(hass, config):
 
     @callback
     def component_loaded(event):
-        """Register Utterances for newly loaded components."""
+        """Handle a new component loaded."""
         register_utterances(event.data[ATTR_COMPONENT])
 
     hass.bus.async_listen(EVENT_COMPONENT_LOADED, component_loaded)
